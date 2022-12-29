@@ -1,6 +1,7 @@
 let numbers = 9;
-let buttonContainer = document.getElementById("buttonContainer")
+let numberContainer = document.getElementById("numberContainer")
 let result = document.getElementById("result")
+let signContainer = document.getElementById("signContainer")
 
 
 //create a button for every possible number
@@ -14,7 +15,7 @@ for(let i = 0; i <= numbers;i++){
     //append each number to a button
     number.append(numberName)
     //append each button to the container
-    buttonContainer.append(number)
+    numberContainer.append(number)
 }
 createAbutton(":")
 createAbutton("x")
@@ -39,5 +40,5 @@ function createAbutton(name){
     //append a name to a button
     bttn.append(bttnName)
     //append  button to the container
-    buttonContainer.append(bttn)
+    signContainer.append(bttn)
 }

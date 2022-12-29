@@ -11,8 +11,17 @@ body{
     flex-direction: column;
     
 }
-#result{
+#resultContainer{
     width: 300px;
     height: 100px;
     background-color: aliceblue;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+#result{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-right: 25px;
 }

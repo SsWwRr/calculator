@@ -3,7 +3,6 @@ let numberContainer = document.getElementById("numberContainer")
 let result = document.getElementById("result")
 let signContainer = document.getElementById("signContainer")
 
-
 //create a button for every possible number
 for(let i = 0; i <= numbers;i++){
     //create a button
@@ -17,13 +16,16 @@ for(let i = 0; i <= numbers;i++){
     //append each button to the container
     numberContainer.append(number)
 }
+createAbutton("Erase")
 createAbutton(":")
 createAbutton("x")
 createAbutton("+")
 createAbutton("-")
 createAbutton("=")
+let erase = document.getElementById("Erase")
+erase.addEventListener("click",()=>result.textContent = "")
 //create an array of all the buttons
-buttons = Array.from(document.querySelectorAll("button"));
+buttons = Array.from(document.querySelectorAll(".button"));
 //for each button add an event listener
 buttons.forEach(button => button
     //if the button is clicked
@@ -36,7 +38,8 @@ function createAbutton(name){
     //assign a name to a button
     let bttnName = document.createTextNode(name)
     //add a class 
-    bttn.className = "button"
+    bttn.className = "sign"
+    bttn.id = name
     //append a name to a button
     bttn.append(bttnName)
     //append  button to the container

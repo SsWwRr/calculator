@@ -45,3 +45,39 @@ function createAbutton(name){
     //append  button to the container
     signContainer.append(bttn)
 }
+function add(a,b){
+    return a + b
+}
+function substract(a,b){
+    return a - b
+}
+function divide(a,b){
+    return a/ b
+}
+function multiply(a,b){
+    return a * b
+}
+console.log(add(3,3))
+console.log(substract(3,3))
+console.log(divide(3,3))
+console.log(multiply(3,3))
+function operate(number1,operator,number2){
+    let array =  number1 + operator + number2 
+    for(let i = 0; i < array.length;i++){
+        if(array[i] == "+"){
+            return number1 + number2
+        }else if(array[i] == "-"){
+            return number1 - number2
+        }
+        else if(array[i] == ":"){
+            return number1 / number2
+        }
+        else if(array[i] == "x"){
+            return number1 * number2
+        }
+    }
+}
+console.log(operate(1,"+",2))
+console.log(operate(1,"-",2))
+console.log(operate(1,":",2))
+console.log(operate(1,"x",2))

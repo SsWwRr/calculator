@@ -39,6 +39,7 @@ let onepart = []
 let twopart = []
 let threepart = []
 let fourpart = []
+let counter = 0
 
 let erase = document.getElementById("Erase")
 erase.addEventListener("click",()=>result.textContent = "")
@@ -65,7 +66,18 @@ console.log(signs)
             //save the sign so that it can be used later
             equationElements = result.textContent
             console.log(equationElements)
+            equationElements = equationElements.replace(/\s/g, '')
+            for(let i = 0; i < equationElements.length;i++){
+                if(isNaN(equationElements[i]) == true){
+                    counter++
+                }
+                if(counter > 1){
+                    calculate()
+                }
+            }
+            
         }
+    
     }))
     //when = pressed
     equals.addEventListener("click",()=>
@@ -75,63 +87,7 @@ console.log(signs)
             alert("Before presseing = input an equation")
             return
         }
-        //remove whitespace from the equation
-        equationElements = equationElements.replace(/\s/g, '')
-        //loop over the length of the equation
-        for(let i = 0; i < equationElements.length;i++){
-            //push the elements as numbers into a new array
-            onepart.push(parseInt(equationElements[i]))
-        }
-        //loop over the length of the new array
-
-        for(let i = 0; i < onepart.length;i++){
-            //if an element is a number
-            if(isNaN(onepart[i])  == false){
-                //push it into a new array
-                twopart.push(onepart[i])
-            }
-            //if the element is not a number
-            if(isNaN(onepart[i]) == true){
-                operator = equationElements[i]
-                //stop looping
-                break
-            }
-        }
-        console.log(operator)
-        for(let i = 0; i < onepart.length;i++){
-            if(onepart[i] != twopart[i]){
-                threepart.push(onepart[i])
-            }
-        }       
-        for(let i = 1; i > onepart.length;i++){
-            console.log(i)
-        }
-        console.log(twopart)
-        for(let i = 0; i < threepart.length;i++){
-            //if an element is a number
-            if(isNaN(threepart[i])  == false){
-                //push it into a new array
-                fourpart.push(threepart[i])
-            }
-            
-        }
-        console.log(fourpart)
-        //take the first array and convert it into numbers
-        for(let i = 0; i< twopart.length;i++){
-            firstNumber += twopart[i]
-        }
-        firstNumber = parseInt(firstNumber)
-        //take the second array and convert it into numbers
-        for(let i = 0; i< fourpart.length;i++){
-            secondNumber += fourpart[i]
-        }
-        secondNumber = parseInt(secondNumber)
-        equation = operate(firstNumber,operator,secondNumber)
-        //check the sign and do this : numbers1 {sign} numbers 2
-      console.log(equation)
-        
-        equationElements = ""
-        result.textContent = equation
+        calculate()
     })
 
 function createAbutton(name){
@@ -188,3 +144,89 @@ console.log(operate(1,"+",2))
 console.log(operate(1,"-",2))
 console.log(operate(1,":",2))
 console.log(operate(1,"x",2))
+function calculate(){
+    //remove whitespace from the equation
+     console.log(equationElements +" lala")
+     equationElements = equationElements.replace(/\s/g, '')
+    //loop over the length of the equation
+    for(let i = 0; i < equationElements.length;i++){
+        //push the elements as numbers into a new array
+        onepart.push(parseInt(equationElements[i]))
+    }
+    //loop over the length of the new array
+    for(let i = 0; i < onepart.length;i++){
+        //if an element is a number
+        if(isNaN(onepart[i])  == false){
+            //push it into a new array
+            twopart.push(onepart[i])
+        }
+        //if the element is not a number
+        if(isNaN(onepart[i]) == true){
+            operator = equationElements[i]
+            //stop looping
+            break
+        }
+    }
+    console.log(operator)
+    for(let i = 0; i < onepart.length;i++){
+        if(onepart[i] != twopart[i]){
+            threepart.push(onepart[i])
+        }
+    }       
+    
+    console.log(twopart)
+    for(let i = 0; i < threepart.length;i++){
+        //if an element is a number
+        if(isNaN(threepart[i])  == false){
+            //push it into a new array
+            fourpart.push(threepart[i])
+        }
+        
+    }
+    console.log(fourpart)
+    //take the first array and convert it into numbers
+    for(let i = 0; i< twopart.length;i++){
+        firstNumber += twopart[i]
+    }
+    firstNumber = parseInt(firstNumber)
+    //take the second array and convert it into numbers
+    for(let i = 0; i< fourpart.length;i++){
+        secondNumber += fourpart[i]
+    }
+    secondNumber = parseInt(secondNumber)
+    equation = operate(firstNumber,operator,secondNumber)
+    //check the sign and do this : numbers1 {sign} numbers 2
+    onepart = []
+    twopart = []
+    threepart = []
+    fourpart = []
+    equationElements = equation
+    console.log(equationElements)
+    result.textContent = equation
+    counter = 0
+    firstNumber = ""
+    secondNumber = ""
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

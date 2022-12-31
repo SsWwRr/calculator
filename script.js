@@ -1,10 +1,18 @@
+//define all possible numbers
 let numbers = 9;
+//numberContainer
 let numberContainer = document.getElementById("numberContainer")
+//what calculator display
 let result = document.getElementById("result")
+//container for operators
 let signContainer = document.getElementById("signContainer")
+//single operator
 let operator = []
+//number1 operator and number 2
 let equationElements = []
+//whole equation
 let equation = []
+
 let firstNumber = ""
 let secondNumber = ""
 //create a button for every possible number
@@ -118,11 +126,12 @@ console.log(signs)
             secondNumber += fourpart[i]
         }
         secondNumber = parseInt(secondNumber)
-        let finished = operate(firstNumber,operator,secondNumber)
+        equation = operate(firstNumber,operator,secondNumber)
         //check the sign and do this : numbers1 {sign} numbers 2
-      console.log(finished)
+      console.log(equation)
         
         equationElements = ""
+        result.textContent = equation
     })
 
 function createAbutton(name){

@@ -2,7 +2,11 @@ let numbers = 9;
 let numberContainer = document.getElementById("numberContainer")
 let result = document.getElementById("result")
 let signContainer = document.getElementById("signContainer")
-
+let operator = []
+let equationElements = []
+let equation = []
+let firstNumber = ""
+let secondNumber = ""
 //create a button for every possible number
 for(let i = 0; i <= numbers;i++){
     //create a button
@@ -22,16 +26,104 @@ createAbutton("x")
 createAbutton("+")
 createAbutton("-")
 createAbutton("=")
+let equals = document.getElementById("=")
+let onepart = []
+let twopart = []
+let threepart = []
+let fourpart = []
+
 let erase = document.getElementById("Erase")
 erase.addEventListener("click",()=>result.textContent = "")
 //create an array of all the buttons
-buttons = Array.from(document.querySelectorAll(".button"));
+let buttons = Array.from(document.querySelectorAll(".button"));
 //for each button add an event listener
 buttons.forEach(button => button
     //if the button is clicked
     .addEventListener("click",
     //append the number to the result
-    ()=>result.append(button.textContent)));
+    ()=>{
+        result.append(button.textContent)
+        equationElements = result.textContent
+        console.log(equationElements.length)
+    }));
+    //create an array of all the signs
+let signs = Array.from(document.querySelectorAll(".sign"))
+console.log(signs)
+    //for each sign add an event listener
+    signs.forEach(sign => sign.addEventListener("click",()=>{
+        //append the sign to the result
+        if(sign.textContent != "=" && sign.textContent != "Erase"){
+            result.append(" " + sign.textContent + " ")
+            //save the sign so that it can be used later
+            equationElements = result.textContent
+            console.log(equationElements)
+        }
+    }))
+    //when = pressed
+    equals.addEventListener("click",()=>
+    {   
+        //TODO
+        if(equationElements.length < 2){
+            alert("Before presseing = input an equation")
+            return
+        }
+        //remove whitespace from the equation
+        equationElements = equationElements.replace(/\s/g, '')
+        //loop over the length of the equation
+        for(let i = 0; i < equationElements.length;i++){
+            //push the elements as numbers into a new array
+            onepart.push(parseInt(equationElements[i]))
+        }
+        //loop over the length of the new array
+
+        for(let i = 0; i < onepart.length;i++){
+            //if an element is a number
+            if(isNaN(onepart[i])  == false){
+                //push it into a new array
+                twopart.push(onepart[i])
+            }
+            //if the element is not a number
+            if(isNaN(onepart[i]) == true){
+                operator = equationElements[i]
+                //stop looping
+                break
+            }
+        }
+        console.log(operator)
+        for(let i = 0; i < onepart.length;i++){
+            if(onepart[i] != twopart[i]){
+                threepart.push(onepart[i])
+            }
+        }       
+        for(let i = 1; i > onepart.length;i++){
+            console.log(i)
+        }
+        console.log(twopart)
+        for(let i = 0; i < threepart.length;i++){
+            //if an element is a number
+            if(isNaN(threepart[i])  == false){
+                //push it into a new array
+                fourpart.push(threepart[i])
+            }
+            
+        }
+        console.log(fourpart)
+        //take the first array and convert it into numbers
+        for(let i = 0; i< twopart.length;i++){
+            firstNumber += twopart[i]
+        }
+        firstNumber = parseInt(firstNumber)
+        //take the second array and convert it into numbers
+        for(let i = 0; i< fourpart.length;i++){
+            secondNumber += fourpart[i]
+        }
+        secondNumber = parseInt(secondNumber)
+        let finished = operate(firstNumber,operator,secondNumber)
+        //check the sign and do this : numbers1 {sign} numbers 2
+      console.log(finished)
+        
+        equationElements = ""
+    })
 
 function createAbutton(name){
     let bttn = document.createElement("button")
@@ -76,6 +168,12 @@ function operate(number1,operator,number2){
             return number1 * number2
         }
     }
+}
+function equationBuilder(number,equation){
+    for(let i = 0; i < number.length;i++){
+        equation.push(number[i])
+    }
+    return equation
 }
 console.log(operate(1,"+",2))
 console.log(operate(1,"-",2))

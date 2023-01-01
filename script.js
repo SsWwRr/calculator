@@ -72,7 +72,7 @@ console.log(signs)
                     counter++
                 }
                 if(counter > 1){
-                    calculate()
+                    calculate(sign.textContent)
                 }
             }
             
@@ -122,16 +122,17 @@ function operate(number1,operator,number2){
     let array =  number1 + operator + number2 
     for(let i = 0; i < array.length;i++){
         if(array[i] == "+"){
-            return number1 + number2
+            return add(number1,number2)
         }else if(array[i] == "-"){
-            return number1 - number2
+            return substract(number1,number2)
         }
         else if(array[i] == ":"){
-            return number1 / number2
+            return Math.ceil(divide(number1,number2))
         }
         else if(array[i] == "x"){
-            return number1 * number2
+            return multiply(number1,number2)
         }
+        
     }
 }
 function equationBuilder(number,equation){
@@ -144,7 +145,7 @@ console.log(operate(1,"+",2))
 console.log(operate(1,"-",2))
 console.log(operate(1,":",2))
 console.log(operate(1,"x",2))
-function calculate(){
+function calculate(sign = ""){
     //remove whitespace from the equation
      console.log(equationElements +" lala")
      equationElements = equationElements.replace(/\s/g, '')
@@ -200,9 +201,14 @@ function calculate(){
     twopart = []
     threepart = []
     fourpart = []
-    equationElements = equation
-    console.log(equationElements)
-    result.textContent = equation
+    if(equation == Infinity){
+        alert("Don't divide by 0!")
+        result.textContent = "0"
+        equationElements = "0"
+    }else{
+        equationElements = equation + sign
+        result.textContent = equation + sign
+    }
     counter = 0
     firstNumber = ""
     secondNumber = ""

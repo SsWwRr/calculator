@@ -33,6 +33,8 @@ body{
     justify-content: end;
     align-items: center;
     margin-right: 25px;
+    padding: 25px;
+    font-size: 60px;
     
 }
 #buttonContainer{
